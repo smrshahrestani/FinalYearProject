@@ -31,5 +31,6 @@ print xx.json()
 
 
 finalText = xx.json().get("choices")[0].get("text").replace("\n", "")
-print sentence + finalText
+print sentence , finalText
+
 
