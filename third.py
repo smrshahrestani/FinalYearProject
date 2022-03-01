@@ -2,6 +2,7 @@
 
 from hashlib import new
 import json
+from operator import indexOf
 
 import requests
 
@@ -15,7 +16,16 @@ def query2(payload):
     response = requests.request("POST", API_URL, headers=headers, data=data)
     return json.loads(response.content.decode("utf-8"))
 
-data = query2({"inputs": "The answer to the universe is [MASK]."})
+
+input = "the capital of England is "
+input = "Tehran is located at "
+input = "this is "
+
+input = "Paris is the city of "
+input = "why is this "
+
+
+data = query2({"inputs": input + " [MASK]."})
 
 
 for i in range(len(data)):

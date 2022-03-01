@@ -19,6 +19,7 @@ wikidata = 'https://query.wikidata.org/sparql'
 
 
 q=('SELECT DISTINCT ?person ?personLabel  WHERE{ ?person wdt:P69 wd:Q160302. ?person wdt:P21 wd:Q6581072. SERVICE wikibase:label {bd:serviceParam wikibase:language "en".}}')
+
 result = sparql.query(wikidata, q)
 
 result2 = sparql.Service(wikidata).query(q)
