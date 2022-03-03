@@ -15,4 +15,3 @@ for i in result:
     print ("row: ", i)
 
 print ("total: ", total)
-
