@@ -1,9 +1,5 @@
 
 
-
-
-
-
 def convertToOneLine(query):
     query = str(query)
     query = query.replace("\n", "")

@@ -1,15 +1,4 @@
 
-
-
-# import os
-# import openai
-
-# openai.organization = "org-SKRaZjElzOCua6C1uGLzStHa"
-# openai.api_key = os.getenv("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")
-# openai.Engine.list()      
-
-
-
 import requests
 import json
 
@@ -19,22 +8,16 @@ id= "Bearer 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"
 
 sentence = "The Capital of Iran is "
 
-
-
 def complete(sentence):
   json = {
     "prompt": sentence,
     "max_tokens": 5
   }
 
+  req = requests.post(completionURL, headers={'Authorization': id},json = json)
+  
+  finalText = req.json().get("choices")[0].get("text").replace("\n", "")
+  return sentence + finalText
 
-  xx = requests.post(completionURL, headers={'Authorization': id},json = json)
-  # print xx.json()
-
-
-  finalText = xx.json().get("choices")[0].get("text").replace("\n", "")
-  # print sentence , finalText
-  return finalText
-
-complete(sentence)
+# print complete(sentence)
 
