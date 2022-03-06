@@ -17,27 +17,34 @@ def query2(payload):
     return json.loads(response.content.decode("utf-8"))
 
 
-input = "the capital of England is "
-input = "Tehran is located at "
 input = "this is "
 
+input = "The Capital of Iran is "
 input = "Paris is the city of "
 input = "why is this "
-input = "The Capital of Iran is "
+input = "Tehran is located in "
+input = "the capital of England is "
 
 
-data = query2({"inputs": input + " [MASK]."})
 
 
-for i in range(len(data)):
-    print "row", data[i]
+# for i in range(len(data)):
+#     print "row", data[i]
 
-newlist = sorted(data, key=lambda k: k["score"], reverse=True) 
 
-print "-"
+# print "-"
 
-for i in range(len(newlist)):
-    print "row", newlist[i]
+# for i in range(len(newlist)):
+#     print "row", newlist[i]
 
-print newlist[0].get("sequence")
 
+
+
+def complete(sentence):
+    data = query2({"inputs": sentence + " [MASK]."})
+    newlist = sorted(data, key=lambda k: k["score"], reverse=True) 
+    final = newlist[0].get("sequence")
+    return final
+
+
+print complete(input)

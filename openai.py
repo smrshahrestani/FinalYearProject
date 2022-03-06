@@ -20,17 +20,20 @@ id= "Bearer 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"
 sentence = "The Capital of Iran is "
 
 
-json = {
-  "prompt": sentence,
-  "max_tokens": 5
-}
+
+def complete(sentence):
+  json = {
+    "prompt": sentence,
+    "max_tokens": 5
+  }
 
 
-xx = requests.post(completionURL, headers={'Authorization': id},json = json)
-print xx.json()
+  xx = requests.post(completionURL, headers={'Authorization': id},json = json)
+  # print xx.json()
 
 
-finalText = xx.json().get("choices")[0].get("text").replace("\n", "")
-print sentence , finalText
+  finalText = xx.json().get("choices")[0].get("text").replace("\n", "")
+  # print sentence , finalText
+  return finalText
 
-
+complete(sentence)

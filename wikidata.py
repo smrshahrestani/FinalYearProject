@@ -13,29 +13,25 @@ wikidata = 'https://query.wikidata.org/sparql'
 # print(result.fetchone())
 
 
-
-
+city = 'SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q7930989. SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }}LIMIT 10'
 
 
 
 q=('SELECT DISTINCT ?person ?personLabel  WHERE{ ?person wdt:P69 wd:Q160302. ?person wdt:P21 wd:Q6581072. SERVICE wikibase:label {bd:serviceParam wikibase:language "en".}}')
 
-result = sparql.query(wikidata, q)
-
-result2 = sparql.Service(wikidata).query(q)
+result = sparql.query(wikidata, city)
 
 
 total= 0
 
 for i in result:
     total +=1
-    print ("row: ", i)
+    print "row: ", i
 
-for i in result2:
-    print ("result2:  ", i)
 
 print ("total: ", total)
 
 
+print "----"
 
 
