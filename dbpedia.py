@@ -1,3 +1,5 @@
+# NOT COMPATABLE WITH PYTHON 3
+
 import sparql
 
 

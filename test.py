@@ -37,11 +37,11 @@ for result in results["results"]["bindings"]:
     sentence = result.get("itemLabel").get("value") + " " + predicate
 
     aianswer = openai.complete(sentence)
-    print sentence , aianswer
+    print (sentence , aianswer)
     print("--------------------------------")
     hanswer = huggingface.complete(sentence)
-    print hanswer
-    print "==="
+    print (hanswer)
+    print ("===")
     #print(result["label"]["value"])
 
 

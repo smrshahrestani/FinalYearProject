@@ -1,3 +1,6 @@
+# NOT COMPATABLE WITH PYTHON 3
+
+
 import sparql
 
 wikidata = 'https://query.wikidata.org/sparql'
@@ -32,6 +35,6 @@ for i in result:
 print ("total: ", total)
 
 
-print "----"
+print ("----")
 
 

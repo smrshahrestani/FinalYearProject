@@ -70,6 +70,6 @@ def getDescriptions(server, query):
 
 
 
-# print getLabels(wikidata, city) # output: [u'Moscow', u'Saint Petersburg', u'Abakan', u'Novosibirsk', u'Yekaterinburg']
+# print (getLabels(wikidata, city)) # output: [u'Moscow', u'Saint Petersburg', u'Abakan', u'Novosibirsk', u'Yekaterinburg']
 # print getLabels(wikidata, capitals # output : [u'Q257391', u'Q377283', u'Q1557068', u'Q2324785', u'Q2912045', u'Q3147563', u'Q4442912', u'Q11271835', u'Q12031379', u'Q14770218', u'Q15840617', u'Q21518270', u'Q34843301', u'Q65589340', u'Q104600084', u'Q105742469', u'Q105742483', u'Q105742499', u'Q107566885', u'Q108178728', u'Q14784328', u'Q21507383', u'Q55737404']
 # print findLabels(query(wikidata,city))

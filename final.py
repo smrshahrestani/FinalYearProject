@@ -59,12 +59,12 @@ def magic(server, query):
 
 
     for i in range(len(listOfVariables)):
-        if len(listOfDescriptions) is  not 0 : sentance = listOfVariables[i] + " is a " + listOfDescriptions[i]
+        if len(listOfDescriptions) != 0 : sentance = listOfVariables[i] + " is a " + listOfDescriptions[i]
         else : sentance = listOfVariables[i]
-        print "open ai: ",openai.complete(sentance + predicate)
-        print "hug: ",huggingface.complete(sentance + predicate)
+        print ("open ai: ",openai.complete(sentance + predicate))
+        print ("hug: ",huggingface.complete(sentance + predicate))
 
-        print "----" * 10
+        print ("----" * 10)
 
-magic('wikidata', musicians)
+magic('wikidata', city)
 

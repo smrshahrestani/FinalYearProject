@@ -18,5 +18,5 @@ WHERE
 }LIMIT 10
 """
 
-# print convertToOneLine(query)
+# print (convertToOneLine(query))
 

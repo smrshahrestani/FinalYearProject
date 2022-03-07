@@ -19,5 +19,5 @@ def complete(sentence):
   finalText = req.json().get("choices")[0].get("text").replace("\n", "")
   return sentence + finalText
 
-# print complete(sentence)
+# print (complete(sentence))
 
