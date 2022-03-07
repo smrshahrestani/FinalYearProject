@@ -4,11 +4,11 @@
 import openai
 import huggingface
 import convertor
-import makeQuery
+import query as queryMaker
 
 
 
-query = """
+q = """
 SELECT DISTINCT ?item ?itemLabel WHERE {
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
   {
@@ -54,8 +54,8 @@ predicate = ' that is located in '
 
 
 def magic(server, query):
-    listOfVariables = makeQuery.getLabels(server, query)
-    listOfDescriptions = makeQuery.getDescriptions(server, query)
+    listOfVariables = queryMaker.getLabels(server, query)
+    listOfDescriptions = queryMaker.getDescriptions(server, query)
 
 
     for i in range(len(listOfVariables)):
