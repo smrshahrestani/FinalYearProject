@@ -24,6 +24,8 @@ input = "why is this "
 input = "the capital of England is "
 input = "Tehran is located in "
 
+
+# sentence has to be changed to before and after
 def complete(sentence):
     data = query({"inputs": sentence + " [MASK]."})
     newlist = sorted(data, key=lambda k: k["score"], reverse=True) 

@@ -50,7 +50,7 @@ musicians = '''select distinct ?item ?itemLabel ?itemDescription where {
 }LIMIT 10'''
 
 
-predicate = ' that is located in '
+predicate = ' is located in '
 
 
 def magic(server, query):
