@@ -54,8 +54,8 @@ predicate = ' is located in '
 
 
 def magic(server, query):
-    listOfVariables = queryMaker.getLabels(server, query)
-    listOfDescriptions = queryMaker.getDescriptions(server, query)
+    listOfVariables = queryMaker.getData(server,query)[0]
+    listOfDescriptions = queryMaker.getData(server,query)[1]
 
 
     for i in range(len(listOfVariables)):

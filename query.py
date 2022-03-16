@@ -67,6 +67,11 @@ def getLabels(server, query):
 def getDescriptions(server, query):
     return findDescriptions(makeQuery(server, query))
 
+def getData(server, query):
+    query = makeQuery(server, query)
+    label = findLabels(query)
+    description = findDescriptions(query)
+    return label, description
 
 
 
