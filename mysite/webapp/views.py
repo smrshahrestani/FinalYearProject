@@ -12,9 +12,12 @@ def index(request):
     return render(request, 'index.html', {'name':'Mohammad'})
 
 def query(request):
-    input1 = request.POST['query']
-    input2 = request.POST['endpoint']
+    query = request.POST['query']
+    endpoint = request.POST['endpoint']
+    print ("this is the endpoint"+endpoint)
+    # customEndpoint = request.POST['Custom_Endpoint_Address']
+    # print (customEndpoint)
 
-    return render(request, 'results.html', {"query": input1, "server": "test"})
+    return render(request, 'results.html', {"query": query, "endpoint": endpoint})
 
 
