@@ -33,4 +33,12 @@ def complete(sentence):
     return final
 
 
+# def complete(sentence,position):
+#     if position == "":
+#     data = query({"inputs": sentence + " [MASK]."})
+#     newlist = sorted(data, key=lambda k: k["score"], reverse=True) 
+#     final = newlist[0].get("sequence")
+#     return final
+
 # print (complete(input))
+# print (complete("the largest city of UK is called "))

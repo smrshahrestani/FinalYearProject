@@ -1,8 +1,6 @@
 
-
-
-import openai
 import huggingface
+import openai
 import convertor
 import query as queryMaker
 
@@ -53,18 +51,42 @@ musicians = '''select distinct ?item ?itemLabel ?itemDescription where {
 predicate = ' is located in '
 
 
-def magic(server, query):
+def get(server, query, before='', after=''):
     listOfVariables = queryMaker.getData(server,query)[0]
     listOfDescriptions = queryMaker.getData(server,query)[1]
 
+    openaiList = []
+    huggingfaceList = []
+
 
     for i in range(len(listOfVariables)):
-        if len(listOfDescriptions) != 0 : sentance = listOfVariables[i] + " is a " + listOfDescriptions[i]
+        if len(listOfDescriptions) != 0 : sentance = listOfVariables[i] + ", " + listOfDescriptions[i]
         else : sentance = listOfVariables[i]
-        print ("open ai: ",openai.complete(sentance + predicate))
-        print ("hug: ",huggingface.complete(sentance + predicate))
+        openaiList.append(openai.complete(before + sentance + after))
+        huggingfaceList.append(openai.complete(before + sentance + after))
+
+        print ("open ai:", openaiList[i])
+        print ("H face:", huggingfaceList[i])
 
         print ("----" * 10)
 
-magic('wikidata', city)
+    return openaiList, huggingfaceList, listOfVariables, listOfDescriptions
 
+# get('wikidata', city, predicate)
+
+
+
+def magic(server, query, predicate):
+
+
+  # print("server:", server)
+  # print("query:", query)
+  # print("predicate:", predicate)
+
+  res = convertor.parse(predicate)
+  if res == -1: return res
+  elif res == 0: return get(server, query, predicate)
+  else:
+    # print("before", res[0]) 
+    # print("after", res[1]) 
+    return get(server, query, res[0], res[1])
