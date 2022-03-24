@@ -75,7 +75,6 @@ def get(server, query, before='', after=''):
 # get('wikidata', city, predicate)
 
 
-
 def magic(server, query, predicate):
 
 
@@ -90,3 +89,4 @@ def magic(server, query, predicate):
     # print("before", res[0]) 
     # print("after", res[1]) 
     return get(server, query, res[0], res[1])
+  
