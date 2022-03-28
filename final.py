@@ -50,14 +50,17 @@ musicians = '''select distinct ?item ?itemLabel ?itemDescription where {
 
 predicate = ' is located in '
 
-
-def get(server, query, before='', after=''):
-    listOfVariables = queryMaker.getData(server,query)[0]
+# queries the database and sends the data along with the predicate to the language models
+# by default it only uses the first label of the query parameters
+# you can change this by adding the fifth parameter
+def get(server, query, before='', after='', answer=0):
+    listOfVariables = queryMaker.getData(server,query)[0][1][answer]
     listOfDescriptions = queryMaker.getData(server,query)[1]
 
     openaiList = []
     huggingfaceList = []
 
+    print("Getting data from the Language Models, Please be patient...")
 
     for i in range(len(listOfVariables)):
         if len(listOfDescriptions) != 0 : sentance = listOfVariables[i] + ", " + listOfDescriptions[i]
@@ -65,28 +68,24 @@ def get(server, query, before='', after=''):
         openaiList.append(openai.complete(before + sentance + after))
         huggingfaceList.append(openai.complete(before + sentance + after))
 
-        print ("open ai:", openaiList[i])
-        print ("H face:", huggingfaceList[i])
+        # print ("open ai:", openaiList[i])
+        # print ("H face:", huggingfaceList[i])
 
-        print ("----" * 10)
+        # print ("----" * 10)
 
     return openaiList, huggingfaceList, listOfVariables, listOfDescriptions
 
 # get('wikidata', city, predicate)
 
 
+# Splits the predicate by sending the predicate to the convertor file 
 def magic(server, query, predicate):
-
-
-  # print("server:", server)
-  # print("query:", query)
-  # print("predicate:", predicate)
+  if predicate == '':
+    get(server, query, predicate, 1)
 
   res = convertor.parse(predicate)
   if res == -1: return res
   elif res == 0: return get(server, query, predicate)
   else:
-    # print("before", res[0]) 
-    # print("after", res[1]) 
     return get(server, query, res[0], res[1])
   

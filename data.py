@@ -5,11 +5,20 @@ predicateList = []
 answerQueryList = []
 
 # query 1
-title1 = "Title 1"
+title1 = "Capital Cities"
 query1 = """
-    SELECT Q1
+# defaultView:BubbleChart
+SELECT DISTINCT ?countryLabel ?population
+{
+  ?country wdt:P31 wd:Q6256 ;
+           wdt:P1082 ?population .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+GROUP BY ?population ?countryLabel
+ORDER BY DESC(?population)
+LIMIT 10
 """
-predicate1 = ["predicate 1"]
+predicate1 = ["The Capital city of $ is ", "pred1 -2"]
 answerQuery1 = """
     answer 1
 """
@@ -19,13 +28,49 @@ predicateList.append(predicate1)
 answerQueryList.append(answerQuery1)
 
 # query 2
-title2 = "Title 2"
+title2 = "The Capital Cities"
 query2 = """
-    Q2
+PREFIX bd: <http://www.bigdata.com/rdf#> 
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+PREFIX wikibase: <http://wikiba.se/ontology#> 
+#added before 2016-10
+SELECT DISTINCT ?country ?countryLabel
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078 .
+  #not a former country
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q3024240}
+  #and no an ancient civilisation (needed to exclude ancient Egypt)
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q28171280}
+  OPTIONAL { ?country wdt:P36 ?capital } .
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY ?country
+LIMIT 10
 """
-predicate2 = ["predicate 2"]
+predicate2 = ["The Capital City of $ is ", "The most important city of $ is "]
 answerQuery2 = """
-    answer 2
+PREFIX bd: <http://www.bigdata.com/rdf#> 
+PREFIX wd: <http://www.wikidata.org/entity/> 
+PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+PREFIX wikibase: <http://wikiba.se/ontology#> 
+#added before 2016-10
+SELECT DISTINCT ?country ?capital ?capitalLabel
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078 .
+  #not a former country
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q3024240}
+  #and no an ancient civilisation (needed to exclude ancient Egypt)
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q28171280}
+  OPTIONAL { ?country wdt:P36 ?capital } .
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY ?country
+LIMIT 10
 """
 titleList.append(title2)
 queryList.append(query2)

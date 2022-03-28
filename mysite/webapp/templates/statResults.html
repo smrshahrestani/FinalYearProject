@@ -39,7 +39,7 @@
                 <td>{{hScore}}</td>
                 <td></td>
                 </tr>
-                {% endfor %}    
+                {% endfor %}
             {% else %}
                 {% for i, label, wikidata, o, oScore, h, hScore in myzip %}    
                 <tr>
@@ -54,7 +54,14 @@
                 </tr>
                 {% endfor %}    
             {% endif %}
-            
+        
+            <th scope="col">#</th>
+            <th scope="col">Overall Score</th>
+            <th scope="col">-</th>
+            <th scope="col">OpenAI</th>
+            <th scope="col">{{openaiOveralScore}}</th>
+            <th scope="col">HuggingFace</th>
+            <th scope="col">{{huggingFaceOveralScore}}</th>
 
 
         </tbody>

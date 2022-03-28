@@ -6,7 +6,8 @@ from operator import indexOf
 
 import requests
 
-API_TOKEN = "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"
+API_TOKEN = "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"
+
 
 headers = {"Authorization": "Bearer " + API_TOKEN}
 API_URL = "https://api-inference.huggingface.co/models/bert-base-uncased"
