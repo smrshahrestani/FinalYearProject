@@ -97,6 +97,7 @@ def getDescriptions(server, query):
     return findDescriptions(makeQuery(server, query))
 
 def getData(server, query):
+    print("Querying From Database, Please be patient...")
     query = makeQuery(server, query)
     label = findLabelsUpdated(query)
     description = findDescriptions(query)

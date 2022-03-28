@@ -54,8 +54,9 @@ predicate = ' is located in '
 # by default it only uses the first label of the query parameters
 # you can change this by adding the fifth parameter
 def get(server, query, before='', after='', answer=0):
-    listOfVariables = queryMaker.getData(server,query)[0][1][answer]
-    listOfDescriptions = queryMaker.getData(server,query)[1]
+    mainQuery = queryMaker.getData(server,query)
+    listOfVariables = mainQuery[0][1][answer]
+    listOfDescriptions = mainQuery[1]
 
     openaiList = []
     huggingfaceList = []

@@ -1,5 +1,4 @@
 
-
 from cmath import pi
 from itertools import count
 from os import PRIO_PGRP
@@ -61,11 +60,9 @@ def removePredicate(label, predicate, final):
       x = x = final[i].replace(label[i], "").replace(predicate, "").replace(".", "")
       finalList.append(x)
 
-  print("Final List : ", finalList)
-
   return finalList
 
-removePredicate(label1, predicate, res0)
+# removePredicate(label1, predicate, res0
 
 
 # ----------------------------------------------------------------

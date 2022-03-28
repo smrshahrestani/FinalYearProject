@@ -78,13 +78,39 @@ predicateList.append(predicate2)
 answerQueryList.append(answerQuery2)
 
 # query 3
-title3 = "Title 3"
+title3 = "Winner of the Academy Awards"
 query3 = """
-    Q3
+#Winner of the Academy Awards by Award and Time
+SELECT DISTINCT ?item ?itemLabel ?time
+{
+    ?item wdt:P106/wdt:P279* wd:Q3455803 ; # Items with the Occupation(P106) of Director(Q3455803) or a subclass(P279)
+          p:P166 ?awardStat .              # ... with an awarded(P166) statement
+    ?awardStat pq:P805 ?award ;            # Get the award (which is "subject of" XXth Academy Awards)
+               ps:P166 wd:Q103360 .        # ... that has the value Academy Award for Best Director(Q103360)
+    ?award wdt:P585 ?time .                # the "point of time" of the Academy Award
+    SERVICE wikibase:label {               # ... include the labels
+        bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en"
+    }
+}
+ORDER BY DESC(?time)
+LIMIT 10
 """
-predicate3 = ["predicate 3"]
+predicate3 = ["$ is the winner of the", "$ has won the ", "The winner of the Academy Awards was $ in ",]
 answerQuery3 = """
-    answer 3
+#Winner of the Academy Awards by Award and Time
+SELECT DISTINCT ?item ?awardLabel ?time
+{
+    ?item wdt:P106/wdt:P279* wd:Q3455803 ; # Items with the Occupation(P106) of Director(Q3455803) or a subclass(P279)
+          p:P166 ?awardStat .              # ... with an awarded(P166) statement
+    ?awardStat pq:P805 ?award ;            # Get the award (which is "subject of" XXth Academy Awards)
+               ps:P166 wd:Q103360 .        # ... that has the value Academy Award for Best Director(Q103360)
+    ?award wdt:P585 ?time .                # the "point of time" of the Academy Award
+    SERVICE wikibase:label {               # ... include the labels
+        bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en"
+    }
+}
+ORDER BY DESC(?time)
+LIMIT 10
 """
 titleList.append(title3)
 queryList.append(query3)
