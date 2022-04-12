@@ -51,3 +51,35 @@ print(similar('the CAPITAL of UK is London', 'the capital of UK is lOnDon'))
 print(cosine_sim('the capital of UK is London', 'the capital of UK is Tehran'))
 print(cosine_sim('the CAPITAL of UK is London', 'the capital of UK is lOnDon'))
 
+
+print("--------------------------------")
+# -------
+
+
+
+import json
+import requests
+
+API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/msmarco-distilbert-base-tas-b"
+api_token = "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"
+headers = {"Authorization": f"Bearer {api_token}"}
+
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
+
+
+def compare(source, sentences):
+    data = query(
+    {
+        "inputs": {
+            "source_sentence": source,
+            "sentences": sentences
+        }
+    })
+    return data
+
+# print("this is the data from hf: ", data)
+## [0.853, 0.981, 0.655]
+
+

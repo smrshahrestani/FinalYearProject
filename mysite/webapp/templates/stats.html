@@ -1,28 +1,17 @@
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
+{% extends "header.html" %}
 
+    {% block header %}
         <title>
-            Statistics Page
+            Statistic Page
         </title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style>
-            p {
-                margin: 20px;
-             }
-            
-            h2 {
-               margin: 20px;
-            }
-         </style>
+    {% endblock header %}
 
-    </head>
-    <body>
-        <h1> Hello, {{name}} </h1>
+    {% block body %}
+    
+        <h1> Statistics Page</h1>
 
-        <form method="post" action='/stats/apply'>
+        <form method="post" id="applyForm" action='/stats/apply'>
             {% csrf_token %}
-
 
             <p> Please Select Your Query From The Following Options: </p>
             <div class="input-group" style="margin-top: 10px; margin-left: 20px; margin-right: 10px; width:80%">
@@ -30,30 +19,27 @@
 
                     {% for i,title in titles %}
                     
-                        <option value="{{i}}" {% if dropdown == i %}selected{% endif %}>{{title}}</option>
+                        <option value="{{i}}" {% if dropdown.0 == i %}selected{% endif %}>{{title}}</option>
 
                     {% endfor %}    
 
                 </select>
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit" onclick="apply()">Apply</button>
+                  <button class="btn btn-outline-secondary" type="submit" onclick="apply(); gettitle()">Apply</button>
                 </div>
               </div>
 
-            
         </form>
 
-
-
-
-
+        
+        
         <form method="post" action='/getstats'>
-
-
             {% csrf_token %}
+            
+            
+            {% comment %} <p id="title" name="title" value="{{dropdown.0}}">{{dropdown.1}}</div> {% endcomment %}
 
-
-            <h2>Q1:</h2>
+            <h2>Main Query:</h2>
             
             <div class="row" style="margin-top: 10px; margin-left: 20px; margin-right: 10px; width:80%">   
                 <textarea class="form-control" id="query" name="query" placeholder="SELECT ?subject ?predicate ?object
@@ -66,7 +52,7 @@ SERVICE {
                  rows="10" required>{{query}}</textarea>
             </div>
 
-            <h2>Q2:</h2>
+            <h2>Answer Query:</h2>
 
 
             <div class="row" style="margin-top: 10px; margin-left: 20px; margin-right: 10px; width:80%">   
@@ -83,13 +69,13 @@ SERVICE {
             <h2>Predicate:</h2>
 
             <div class="input-group" style="margin-top: 10px; margin-left: 20px; margin-right: 10px; width:80%">
-                <input type="text" class="form-control" aria-label="Text input with dropdown button" name="predicate" id="predicate" placeholder="The largest city of $ is called " value="{{predicate}}" required>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" name="predicateText" id="predicateText" placeholder="The largest city of $ is called " value="{{predicate}}" required>
                 <div class="input-group-append">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
                 <div class="dropdown-menu">
-                    {% for predicate in predicates %}
+                    {% for p in predicates %}
 
-                        <a class="dropdown-item" onclick="updatePredicate('{{predicate}}')" >{{predicate}}</a>
+                        <a class="dropdown-item" onclick="updatePredicate('{{p}}')" >{{p}}</a>
                     {% endfor %}
 
                 </div>
@@ -100,25 +86,21 @@ SERVICE {
 
 
             <dir class="row" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
-                <input type="submit" onclick="title()">
+                <input type="submit" onclick="gettitle()">
             </dir>
 
         </form>
         <hr>
-
-        
 
 
         {%block content %}
         {% endblock %}
 
 
-
-
         <script type="text/javascript">
 
             function updatePredicate(predicate) {
-                document.getElementById('predicate').value = predicate
+                document.getElementById('predicateText').value = predicate
             }
            
 
@@ -126,18 +108,17 @@ SERVICE {
                 var queryDropDown = document.getElementById("queryDropDown").value;
                }
 
-            function title(){
-                document.getElementById('title').value = document.getElementById('queryDropDown').value
+            function gettitle(){
+                document.getElementById('title').innerHTML = document.getElementById('queryDropDown').value
+                console.log( document.getElementById('queryDropDown').value)
             }
-
-            
-
-
+{% comment %} 
+            const inputElement = document.getElementById('applyForm')
+                inputElement.onclick = (e) => {
+	                e.preventDefault()
+                } {% endcomment %}
 
 
         </script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
-</html>
+        
+    {% endblock body %}

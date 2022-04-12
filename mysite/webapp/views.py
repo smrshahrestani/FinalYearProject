@@ -1,3 +1,5 @@
+from ast import Num
+from glob import glob
 from re import T
 from this import d
 from django.shortcuts import render
@@ -16,7 +18,7 @@ import convertor
 
 
 # Create your views here.
-name = "Seyed"
+
 data = dataClass.getData()
 titles, queries, predicates, answerQueries = data[0], data[1], data[2], data[3]
 
@@ -24,13 +26,13 @@ titles, queries, predicates, answerQueries = data[0], data[1], data[2], data[3]
 
 # A function for loading the index page
 def index(request):
-    return render(request, 'index.html', {'name':name})
+    return render(request, 'index.html', { "currentPage": "index"})
 
 # A function for loading the static page
 def stats(request):
 
     myContext = {
-        "name": name,
+         "currentPage": "stats",
         "titles": zip(range(len(titles)),titles),
         "answerQueries": zip(range(len(answerQueries)),answerQueries),
 
@@ -40,28 +42,31 @@ def stats(request):
 
 
 
-
 def apply(request):
 
     dropdown = int(request.POST.get('queryDropDown'))
 
+
     myContext = {
-        "name": name,
+        "currentPage": "",
         "titles": zip(range(len(titles)),titles),
         "query": queries[dropdown],
         "answerQuery": answerQueries[dropdown],
         "predicates": predicates[dropdown],
-        "dropdown": dropdown,
+        "dropdown": [dropdown, titles[dropdown]],
 
     }
+
     return render(request, 'stats.html', myContext)
 
 
 def statsData(request):
-
+    
     query = request.POST['query']
-    predicate = request.POST['predicate']
+    predicate = request.POST['predicateText']
     answerQuery = request.POST['answerQuery']
+    dropdown = request.POST.get('title')
+    print("this is the dropdown ", dropdown)
 
 
     results = final.magic("wikidata", query, predicate)
@@ -72,30 +77,46 @@ def statsData(request):
     openaiFinal = convertor.removePredicate(results[2], predicate, results[0])
     huggingFaceFinal = convertor.removePredicate(results[2], predicate, results[1])
 
+    print("openaifinal: " , openaiFinal)
+    print("hffinal: " , huggingFaceFinal)
+    print("wikires: " , wikidataResults)
+
+    compare_score_api = convertor.getScore(wikidataResults, [openaiFinal, huggingFaceFinal])
+    openaiScore_api = [round(x,3) for x in compare_score_api[0]]
+    huggingfaceScore_api = [round(x,3) for x in compare_score_api[1]]
+
+    openaiOveralScore_api = round(sum(openaiScore_api)/len(openaiScore_api),3)
+    huggingFaceOveralScore_api = round(sum(huggingfaceScore_api)/len(huggingfaceScore_api),3)
+
+
     openaiScore = convertor.calcScore(wikidataResults, openaiFinal, huggingFaceFinal)[0]
     huggingfaceScore = convertor.calcScore(wikidataResults, openaiFinal, huggingFaceFinal)[1]
 
     openaiOveralScore = round(sum(openaiScore)/len(openaiScore),3)
     huggingFaceOveralScore = round(sum(huggingfaceScore)/len(huggingfaceScore),3)
 
+
     if results[3] == []: 
         hasDescription = False
-        myzip = zip(range(len(results[2])),results[2], wikidataResults, results[0], openaiScore, results[1], huggingfaceScore)
+        myzip = zip(range(len(results[2])),results[2], wikidataResults, results[0], openaiScore, openaiScore_api, results[1], huggingfaceScore, huggingfaceScore_api)
     else: 
         hasDescription = True
-        myzip = zip(range(len(results[2])),results[2], results[3], wikidataResults, results[0], openaiScore, results[1], huggingfaceScore)
+        myzip = zip(range(len(results[2])),results[2], results[3], wikidataResults, results[0], openaiScore, openaiScore_api, results[1], huggingfaceScore, huggingfaceScore_api)
 
     myContext = {
-        "name": name,
+         "currentPage": "stats",
         "titles": zip(range(len(titles)),titles),
         "query": query,
         "answerQuery": answerQuery,
-        "predicates": predicate,
+        "predicate": predicate,
         "mydata": "myData",
         "myzip": myzip,
         "hasDescription": hasDescription,
         "openaiOveralScore": openaiOveralScore,
         "huggingFaceOveralScore": huggingFaceOveralScore,
+        "openaiOveralScore_api" : openaiOveralScore_api,
+        "huggingFaceOveralScore_api": huggingFaceOveralScore_api,
+        "dropdown": dropdown,
     }
 
     return render(request, 'statResults.html', myContext)
@@ -123,7 +144,7 @@ def query(request):
         myzip = zip(range(len(results[2])),results[2], results[3], results[0], results[1])
 
     myContext = {
-        "name": name,
+         "currentPage": "stats",
         "query": query,
         "endpoint": endpoint,
         "predicate": predicate,

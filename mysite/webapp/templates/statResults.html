@@ -19,15 +19,17 @@
             <th scope="col">WikiData</th>
             <th scope="col">OpenAI</th>
             <th scope="col">OpenAI Score</th>
+            <th scope="col">OpenAI Score API</th>
             <th scope="col">HuggingFace</th>
             <th scope="col">HuggingFace Score</th>
+            <th scope="col">HuggingFace Score API</th>
             
           </tr>
         </thead>
         <tbody>
 
             {% if hasDescription %}
-                {% for i, label, description, wikidata, o, oScore, h, hScore in myzip %}    
+                {% for i, label, description, wikidata, o, oScore, oScore_api, h, hScore, hScore_api in myzip %}    
                 <tr>
                 <th scope="row">{{i}}</th>
                 <td>{{label}}</td>
@@ -35,21 +37,25 @@
                 <td>{{wikidata}}</td>
                 <td>{{o}}</td>
                 <td>{{oScore}}</td>
+                <td>{{oScore_api}}</td>
                 <td>{{h}}</td>
                 <td>{{hScore}}</td>
+                <td>{{hScore_api}}</td>
                 <td></td>
                 </tr>
                 {% endfor %}
             {% else %}
-                {% for i, label, wikidata, o, oScore, h, hScore in myzip %}    
+                {% for i, label, wikidata, o, oScore, oScore_api, h, hScore, hScore_api in myzip %}    
                 <tr>
                 <th scope="row">{{i}}</th>
                 <td>{{label}}</td>
                 <td>{{wikidata}}</td>
                 <td>{{o}}</td>
                 <td>{{oScore}}</td>
+                <td>{{oScore_api}}</td>
                 <td>{{h}}</td>
                 <td>{{hScore}}</td>
+                <td>{{hScore_api}}</td>
                 <td></td>
                 </tr>
                 {% endfor %}    
@@ -60,8 +66,10 @@
             <th scope="col">-</th>
             <th scope="col">OpenAI</th>
             <th scope="col">{{openaiOveralScore}}</th>
+            <th scope="col">{{openaiOveralScore_api}}</th>
             <th scope="col">HuggingFace</th>
             <th scope="col">{{huggingFaceOveralScore}}</th>
+            <th scope="col">{{huggingFaceOveralScore_api}}</th>
 
 
         </tbody>

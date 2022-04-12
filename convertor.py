@@ -54,10 +54,10 @@ def removePredicate(label, predicate, final):
   
   for i in range(len(label)):
     if "$" in predicate:
-      x = final[i].replace(label[i], "$").replace(predicate, "").replace(".", "")
+      x = final[i].replace(label[i], "$").replace(predicate, "").replace(".", "").replace(",", "")
       finalList.append(x)
     else:
-      x = x = final[i].replace(label[i], "").replace(predicate, "").replace(".", "")
+      x = final[i].replace(label[i], "").replace(predicate, "").replace(".", "").replace(",", "")
       finalList.append(x)
 
   return finalList
@@ -94,3 +94,60 @@ def calcScore(wikidata, openai, huggingface):
 
 
   return openaiList, huggingfaceList
+
+
+
+
+
+
+import json
+import requests
+
+API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/msmarco-distilbert-base-tas-b"
+api_token = "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"
+headers = {"Authorization": f"Bearer {api_token}"}
+
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
+
+
+def compare(source, sentences):
+
+    data = query(
+    {
+        "inputs": {
+            "source_sentence": source,
+            "sentences": sentences
+        }
+    })
+    print("this is data: ", data)
+    return data
+
+def getScore(source, sentences):
+    pairScore = []
+    for j in range(len(source)):
+      a = []
+      for i in sentences:
+        a.append(i[j])
+      pairScore.append(compare(source[j], a))
+    
+    final = []
+    for j in range(len(pairScore[0])):
+      lmScore = []
+      for i in pairScore:
+        lmScore.append(i[j])
+      final.append(lmScore)
+    return final
+
+
+
+# openai = ['Nairobi', 'Addis Ab', 'The capital of', 'Paris', 'London', 'The capital of', 'Brasí', 'Moscow', 'Ottawa', 'Tokyo']
+# hface = ['Nairobi', 'Addis Ab', 'The capital city', 'Paris', 'London', 'Beijing', 'Brasí', 'Moscow', 'Ottawa', 'Tokyo']
+# w = ['Nairobi', 'Addis Ababa', 'Accra', 'Paris', 'London', 'Beijing', 'Brasília', 'Moscow', 'Ottawa', 'Tokyo']
+# all = [openai, hface]
+# q = getScore(w,all)
+
+
+# compare_score_api = [round(x,3) for x in q[0]]
+# print('compare the score: ', compare_score_api)
