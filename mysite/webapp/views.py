@@ -24,9 +24,9 @@ titles, queries, predicates, answerQueries = data[0], data[1], data[2], data[3]
 
 
 
-# A function for loading the index page
-def index(request):
-    return render(request, 'index.html', { "currentPage": "index"})
+# A function for loading the playground page
+def playground(request):
+    return render(request, 'playground.html', { "currentPage": "playground"})
 
 # A function for loading the static page
 def stats(request):

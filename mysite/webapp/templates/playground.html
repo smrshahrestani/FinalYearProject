@@ -2,14 +2,14 @@
 
     {% block header %}
         <title>
-            Query Parser
+            Playground
         </title>
     {% endblock header %}
 
     {% block body %}
-        <h1> Query Parser </h1>
+        <h1> Playground </h1>
 
-        <form method="post" action='/query'>
+        <form method="post" action='playground/query'>
             {% csrf_token %}
 
 

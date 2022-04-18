@@ -160,7 +160,7 @@ answerQueryList.append(answerQuery4)
 
 
 # query 5
-title5 = "Winners of the Nobel Price"
+title5 = "Winners of the Nobel Prize"
 query5 = """
 #People that received both Academy Award and Nobel Prize
 SELECT DISTINCT ?Person ?NobelPrizeLabel WHERE {
@@ -172,7 +172,7 @@ SELECT DISTINCT ?Person ?NobelPrizeLabel WHERE {
 }ORDER BY DESC(?Person)
 LIMIT 10
 """
-predicate5 = ["the winner of $ is ", "$ is a valuable price that was won by "]
+predicate5 = ["the winner of $ is ", "$ is a valuable prize that was won by "]
 answerQuery5 = """
 
 
@@ -193,7 +193,7 @@ answerQueryList.append(answerQuery5)
 
 
 # query 6
-title6 = "Winners of the Nobel Price - 2"
+title6 = "Winners of the Nobel Prize - 2"
 query6 = """
 #People that received both Academy Award and Nobel Prize
 SELECT DISTINCT ?Person ?PersonLabel WHERE {
@@ -205,7 +205,7 @@ SELECT DISTINCT ?Person ?PersonLabel WHERE {
 }ORDER BY DESC(?Person)
 LIMIT 10
 """
-predicate6 = ["$ is the winner of ", "$ is the winner of Nobel price in "]
+predicate6 = ["$ is the winner of ", "$ is the winner of Nobel prize in "]
 answerQuery6 = """
 #People that received both Academy Award and Nobel Prize
 SELECT DISTINCT ?Person ?NobelPrizeLabel WHERE {
