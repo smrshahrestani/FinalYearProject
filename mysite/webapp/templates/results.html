@@ -20,16 +20,16 @@
             <th scope="col">HuggingFace</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
 
             {% if hasDescription %}
                 {% for i, label, description, o, h in myzip %}    
                 <tr>
                 <th scope="row">{{i}}</th>
-                <td>{{label}}</td>
+                <td id="label_result">{{label}}</td>
                 <td>{{description}}</td>
-                <td>{{o}}</td>
-                <td>{{h}}</td>
+                <td id="openai_result">{{o}}</td>
+                <td id="huggingface_result">{{h}}</td>
                 <td></td>
                 </tr>
                 {% endfor %}    
@@ -37,9 +37,9 @@
                 {% for i, label, o, h in myzip %}    
                 <tr>
                 <th scope="row">{{i}}</th>
-                <td>{{label}}</td>
-                <td>{{o}}</td>
-                <td>{{h}}</td>
+                <td id="label_result">{{label}}</td>
+                <td id="openai_result">{{o}}</td>
+                <td id="huggingface_result">{{h}}</td>
                 <td></td>
                 </tr>
                 {% endfor %}    

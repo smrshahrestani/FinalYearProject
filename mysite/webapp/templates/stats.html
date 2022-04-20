@@ -1,7 +1,7 @@
 {% extends "header.html" %}
 
     {% block header %}
-        <title>
+        <title id="headerTitle">
             Statistics
         </title>
     {% endblock header %}
@@ -25,7 +25,7 @@
 
                 </select>
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit" onclick="apply(); gettitle()">Apply</button>
+                  <button id="apply" class="btn btn-outline-secondary" type="submit" onclick="apply(); gettitle()">Apply</button>
                 </div>
               </div>
 
@@ -71,8 +71,8 @@ SERVICE {
             <div class="input-group" style="margin-top: 10px; margin-left: 20px; margin-right: 10px; width:80%">
                 <input type="text" class="form-control" aria-label="Text input with dropdown button" name="predicateText" id="predicateText" placeholder="The largest city of $ is called " value="{{predicate}}" required>
                 <div class="input-group-append">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-                <div class="dropdown-menu">
+                <button id="dropdownButton" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                <div id="predicateDropDown" class="dropdown-menu">
                     {% for p in predicates %}
 
                         <a class="dropdown-item" onclick="updatePredicate('{{p}}')" >{{p}}</a>
@@ -86,7 +86,7 @@ SERVICE {
 
 
             <dir class="row" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
-                <input type="submit" onclick="gettitle()">
+                <input id="submit" type="submit" onclick="gettitle()">
             </dir>
 
         </form>

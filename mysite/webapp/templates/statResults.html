@@ -26,19 +26,19 @@
             
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
 
             {% if hasDescription %}
                 {% for i, label, description, wikidata, o, oScore, oScore_api, h, hScore, hScore_api in myzip %}    
                 <tr>
                 <th scope="row">{{i}}</th>
-                <td>{{label}}</td>
+                <td id="label_result">{{label}}</td>
                 <td>{{description}}</td>
                 <td>{{wikidata}}</td>
-                <td>{{o}}</td>
+                <td id="openai_result">{{o}}</td>
                 <td>{{oScore}}</td>
                 <td>{{oScore_api}}</td>
-                <td>{{h}}</td>
+                <td id="huggingface_result">{{h}}</td>
                 <td>{{hScore}}</td>
                 <td>{{hScore_api}}</td>
                 <td></td>
@@ -48,12 +48,12 @@
                 {% for i, label, wikidata, o, oScore, oScore_api, h, hScore, hScore_api in myzip %}    
                 <tr>
                 <th scope="row">{{i}}</th>
-                <td>{{label}}</td>
+                <td id="label_result">{{label}}</td>
                 <td>{{wikidata}}</td>
-                <td>{{o}}</td>
+                <td id="openai_result">{{o}}</td>
                 <td>{{oScore}}</td>
                 <td>{{oScore_api}}</td>
-                <td>{{h}}</td>
+                <td id="huggingface_result">{{h}}</td>
                 <td>{{hScore}}</td>
                 <td>{{hScore_api}}</td>
                 <td></td>

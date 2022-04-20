@@ -66,7 +66,7 @@ def statsData(request):
     predicate = request.POST['predicateText']
     answerQuery = request.POST['answerQuery']
     dropdown = request.POST.get('title')
-    print("this is the dropdown ", dropdown)
+    # print("this is the dropdown ", dropdown)
 
 
     results = final.magic("wikidata", query, predicate)
