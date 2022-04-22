@@ -1,3 +1,7 @@
+# @Author: Seyed Mohammad Reza Shahrestani
+# @date: 22/04/2022
+
+
 # A Stupid Database
 
 titleList = []
@@ -223,9 +227,7 @@ predicateList.append(predicate6)
 answerQueryList.append(answerQuery6)
 
 
-
-
+# A getter function to get the data from this file
+# @return: [String: titles], [String: queries], [[String: predicate 1], [String: predicate 2], ...], [String: answer query]
 def getData():
     return titleList, queryList, predicateList, answerQueryList
-
-

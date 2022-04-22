@@ -31,13 +31,8 @@
 
         </form>
 
-        
-        
         <form method="post" action='results'>
             {% csrf_token %}
-            
-            
-            {% comment %} <p id="title" name="title" value="{{dropdown.0}}">{{dropdown.1}}</div> {% endcomment %}
 
             <h2>Main Query:</h2>
             
@@ -53,7 +48,6 @@ SERVICE {
             </div>
 
             <h2>Answer Query:</h2>
-
 
             <div class="row" style="margin-top: 10px; margin-left: 20px; margin-right: 10px; width:80%">   
                 <textarea class="form-control" id="answerQuery" name="answerQuery" placeholder="SELECT ?subject ?predicate ?object
@@ -92,7 +86,6 @@ SERVICE {
         </form>
         <hr>
 
-
         {%block content %}
         {% endblock %}
 
@@ -112,13 +105,13 @@ SERVICE {
                 document.getElementById('title').innerHTML = document.getElementById('queryDropDown').value
                 console.log( document.getElementById('queryDropDown').value)
             }
-{% comment %} 
-            const inputElement = document.getElementById('applyForm')
-                inputElement.onclick = (e) => {
-	                e.preventDefault()
-                } {% endcomment %}
-
 
         </script>
         
     {% endblock body %}
+
+
+{% comment %} 
+@Author: Seyed Mohammad Reza Shahrestani
+@date: 22/04/2022 
+{% endcomment %}

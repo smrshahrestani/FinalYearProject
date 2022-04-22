@@ -1,5 +1,7 @@
-from re import A, S
-from turtle import home
+# @Author: Seyed Mohammad Reza Shahrestani
+# @date: 22/04/2022
+
+
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
 from selenium import webdriver
@@ -19,9 +21,10 @@ class TestPage(StaticLiveServerTestCase):
         self.client = Client()
         self.count = 0
 
+
     def tearDown(self):
-        self.count = 0
         self.browser.close()
+
 
     def test_home_page_is_stats_page(self):
         self.browser.get('http://localhost:8000/')
@@ -30,6 +33,7 @@ class TestPage(StaticLiveServerTestCase):
 
         self.assertEqual(browser_title, "Statistics")
     
+
     def test_stats_page_is_stats_page(self):
         self.browser.get('http://localhost:8000/stats')
         self.browser.implicitly_wait(1)
@@ -37,12 +41,14 @@ class TestPage(StaticLiveServerTestCase):
 
         self.assertEqual(browser_title, "Statistics")
 
+
     def test_playground_page_is_playground_page(self):
         self.browser.get('http://localhost:8000/playground')
         self.browser.implicitly_wait(1)
         browser_title = self.browser.title
 
         self.assertEqual(browser_title, "Playground")
+
 
     def test_nav_logo_links_to_home_page(self):
         self.browser.get('http://localhost:8000/')
@@ -55,12 +61,14 @@ class TestPage(StaticLiveServerTestCase):
 
         self.assertEqual(self.browser.current_url, homePage)
 
+
     def test_nav_statistic_links_to_stats_page(self):
         self.browser.get('http://localhost:8000/')
         self.browser.implicitly_wait(1)
         self.browser.find_element(By.ID,"statsPageButton").click()
 
         self.assertEqual(self.browser.current_url, "http://localhost:8000/stats")
+
 
     def test_nav_playground_links_to_playground_page(self):
         self.browser.get('http://localhost:8000/')
@@ -69,12 +77,14 @@ class TestPage(StaticLiveServerTestCase):
 
         self.assertEqual(self.browser.current_url, "http://localhost:8000/playground")
 
+
     def test_nav_github_button_links_to_github_page(self):
         self.browser.get('http://localhost:8000/')
         self.browser.implicitly_wait(1)
         self.browser.find_element(By.ID,"githubPageButton").click()
 
         self.assertEqual(self.browser.current_url, "https://github.com/smrshahrestani")
+
 
     def test_playground_query_results_returns_10_items(self):
         self.browser.get('http://localhost:8000/playground')
@@ -114,7 +124,11 @@ class TestPage(StaticLiveServerTestCase):
         html_list = self.browser.find_element(By.ID, "tbody")
         items = html_list.find_elements_by_tag_name("th")
 
+        # Resets the counter
+        self.count = 0
+
         self.assertEqual(len(items), 10)
+
 
     def test_playground_query_results_contains_the_predicate_and_label(self):
         self.browser.get('http://localhost:8000/playground')
@@ -153,9 +167,13 @@ class TestPage(StaticLiveServerTestCase):
         openai = self.browser.find_element(By.ID, "openai_result")
         hFace = self.browser.find_element(By.ID, "huggingface_result")
 
-        self.assertTrue(label.text in openai.text)
-        self.assertTrue(label.text in hFace.text)
+        # Resets the counter
+        self.count = 0
+
+        self.assertTrue(label.text.lower() in openai.text.lower())
+        self.assertTrue(label.text.lower() in hFace.text.lower())
     
+
     def test_playground_predicate_has_more_than_one_dollar_simbol_fails(self):
         self.browser.get('http://localhost:8000/playground')
 
@@ -168,6 +186,7 @@ class TestPage(StaticLiveServerTestCase):
 
         self.assertEqual(self.browser.title, "")
     
+
     def test_stats_page_apply_results_are_not_empty(self):
         self.browser.get('http://localhost:8000/stats')
         select = Select(self.browser.find_element_by_id('queryDropDown'))
@@ -180,10 +199,11 @@ class TestPage(StaticLiveServerTestCase):
         self.assertTrue(query != '')
         self.assertTrue(answerQuery != '')
 
-    def test_stats_page_results(self):
+
+    def test_stats_page_results_contains_the_predicate_and_label(self):
         self.browser.get('http://localhost:8000/stats')
         select = Select(self.browser.find_element_by_id('queryDropDown'))
-        select.select_by_value('1')
+        select.select_by_value('3')
         self.browser.find_element(By.ID,"apply").send_keys(Keys.RETURN)
         self.browser.implicitly_wait(10)
         self.browser.find_element(By.ID, "dropdownButton").send_keys(Keys.RETURN)
@@ -203,8 +223,9 @@ class TestPage(StaticLiveServerTestCase):
         html_list = self.browser.find_element(By.ID, "tbody")
         items = html_list.find_elements_by_tag_name("th")
         
-        self.assertEqual(len(items), 19)
-        self.assertTrue(label.text in openai.text)
-        self.assertTrue(label.text in hFace.text)
-        
+        # Resets the counter
+        self.count = 0
 
+        self.assertEqual(len(items), 19)
+        self.assertTrue(label.text.lower() in openai.text.lower())
+        self.assertTrue(label.text.lower() in hFace.text.lower())

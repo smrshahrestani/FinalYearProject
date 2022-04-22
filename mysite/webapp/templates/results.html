@@ -5,9 +5,6 @@
         {{i.3}}
     {% endfor %}    
 
-
-
-
     <table class="table table-striped table-dark">
         <thead>
           <tr>
@@ -44,36 +41,15 @@
                 </tr>
                 {% endfor %}    
             {% endif %}
-            
-
 
         </tbody>
     </table>
-
-
 
     <p></p>
 {% endblock content %}
 
 
-
-
-
 {% comment %} 
-{% for i in labels %}
-            {{i}}
-                {% for label in labels %}
-                {% for description in descriptions %}
-                {% for o in openai %}
-                {% for h in huggingface %}
-                <tr>
-                <th scope="row">{{i}}</th>
-                <td>{{label}}</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-                {% endfor %}
-                {% endfor %}
-            {% endfor %} {% endcomment %}
+@Author: Seyed Mohammad Reza Shahrestani
+@date: 22/04/2022 
+{% endcomment %}
