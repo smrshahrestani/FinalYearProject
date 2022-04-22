@@ -1,7 +1,25 @@
 # FinalYearProject
 
 
-readme file
+title: SMR's Final Project
+
+Explanation: 
+This project aims to compare the performance of two Languages Models by using SPARQL queries
+This project has 2 main sections
+1. Statistics page
+    This page consists of 2 queries from wikidata along with a predicate that will then be sent to two language models to get the results
+    the way it works is, 
+    the first query is the question query, this is the query you want to use to get the data from wikidata
+
+2. Playground page
+
+For installing the software, you need to have access to the internet
+and have python 3 installed
+if you don't have python 3 installed, please visit this page: https://www.python.org/downloads/
+
+1. unzip the file
+2. open terminal / shell and navigate to the project directory
+3. 
 
 
 1. open a terminal and navigate to the folder
