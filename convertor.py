@@ -2,18 +2,17 @@
 # @date: 22/04/2022
 
 
-import re
 import requests
 from difflib import SequenceMatcher
-
+import time
 
 # Converts the query to a single line
 # @params: String
 # @return: String
 def convertToOneLine(query):
-    query = str(query)
-    query = query.replace("\n", "")
-    return query
+  query = str(query)
+  query = query.replace("\n", "")
+  return query
 
 
 # Parses the sentence and splits it into two parts
@@ -42,11 +41,12 @@ def removePredicate(label, predicate, final):
   finalList = []
 
   for i in range(len(label)):
-
+    x = predicate.lower()
     if "$" in predicate:
       x = predicate.lower().replace("$", label[i].lower())
-      
-    x = x.replace(predicate, "").replace(".", "").replace(",", "")
+
+    x.replace(predicate.lower(), "").replace(".", "").replace(",", "")
+
     x = final[i].lower().replace(x, "")
     finalList.append(x.lower())
 
@@ -57,9 +57,9 @@ def removePredicate(label, predicate, final):
 # @params: String: the first string, String: the second string
 # @return: Float: a number between 0 and 1
 def similar(a, b):
-    a = a.lower()
-    b = b.lower()
-    return SequenceMatcher(None, a, b).ratio()
+  a = a.lower()
+  b = b.lower()
+  return SequenceMatcher(None, a, b).ratio()
 
 
 # This function calculates the similarity of openai and huggingface with wikidata
@@ -87,8 +87,8 @@ headers = {"Authorization": f"Bearer {api_token}"}
 # @params: Dict: inputs
 # @return: Json object
 def query(payload):
-    response = requests.post(API_URL, headers=headers, json=payload)
-    return response.json()
+  response = requests.post(API_URL, headers=headers, json=payload)
+  return response.json()
 
 
 # This function puts the parameters into a dictionary
@@ -96,14 +96,14 @@ def query(payload):
 # @params: String: the source sentence, [Strings: list of sentences to be compared with the source sentence]
 # @return: Json object
 def compare(source, sentences):
-    data = query(
-    {
-        "inputs": {
-            "source_sentence": source,
-            "sentences": sentences
-        }
-    })
-    return data
+  data = query(
+  {
+      "inputs": {
+          "source_sentence": source,
+          "sentences": sentences
+      }
+  })
+  return data
 
 
 # This function pairs the sentences of the language models, then sends it to the comapre function
@@ -112,18 +112,19 @@ def compare(source, sentences):
 # @return: [Float: final scores]
 def getScore(source, sentences):
 
-    pairScore = []
-    for j in range(len(source)):
-      a = []
-      for i in sentences:
-        a.append(i[j])
-      pairScore.append(compare(source[j], a))
-    
-    final = []
-    for j in range(len(pairScore[0])):
-      lmScore = []
-      for i in pairScore:
-        lmScore.append(i[j])
-      final.append(lmScore)
+  pairScore = []
+  for j in range(len(source)):
+    a = []
+    for i in sentences:
+      a.append(i[j])
+    pairScore.append(compare(source[j], a))
+    time.sleep(0.1) # sleep for 0.1s
+  
+  final = []
+  for j in range(len(pairScore[0])):
+    lmScore = []
+    for i in pairScore:
+      lmScore.append(i[j])
+    final.append(lmScore)
 
-    return final
+  return final

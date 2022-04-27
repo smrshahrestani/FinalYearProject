@@ -47,7 +47,6 @@ def findDescriptions(query):
         for key in i:
             if "Description" in key:
                 values.append(i.get(key).get("value"))
-    print(values)
     return values
 
 

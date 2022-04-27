@@ -3,7 +3,6 @@
 
 
 import requests
-import json
 
 # OpenAi URL
 completionURL = "https://api.openai.com/v1/engines/text-davinci-001/completions"

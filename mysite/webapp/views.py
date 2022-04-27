@@ -69,6 +69,7 @@ def statsData(request):
     # Returns an Error page with this message if the user uses more that one '$' 
     if results == -1: return HttpResponse("Use of too many '$' in the predicate")
 
+    # time.sleep(5)
     # Queries the 'answer query' to the wikidata and stores the result as a List of strings
     wikidataResults = queryMaker.getData("wikidata", answerQuery)[0][1][0]
 
