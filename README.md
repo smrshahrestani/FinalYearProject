@@ -102,3 +102,13 @@ then run the following command:
 ```shell
 $ python mysite/manage.py test webapp
 ```
+
+----------------------------------------------------------------
+
+## In Case of an Error 500
+
+It is sometimes possible to get an 'Error 500' from the app.
+This is because in the Language Models' peak usage time, the requests may not be accepted by their end, that is why the app shows this error.
+
+To fix this issue, wait for a few seconds, then reload the page.
+Everything should work.

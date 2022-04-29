@@ -138,7 +138,7 @@ def getScore(source, sentences):
     for i in sentences:
       a.append(i[j])
     pairScore.append(compare(source[j], a))
-    time.sleep(0.3) # sleep for 0.1s
+    time.sleep(0.1) # sleep
   
   final = []
   for j in range(len(pairScore[0])):

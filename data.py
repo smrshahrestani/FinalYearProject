@@ -10,22 +10,31 @@ predicateList = []
 answerQueryList = []
 
 # query 1
-title1 = "Capital Cities"
+title1 = "Instructions"
 query1 = """
-# defaultView:BubbleChart
-SELECT DISTINCT ?countryLabel ?population
-{
-  ?country wdt:P31 wd:Q6256 ;
-           wdt:P1082 ?population .
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-}
-GROUP BY ?population ?countryLabel
-ORDER BY DESC(?population)
-LIMIT 10
+# Please write a query or select a pre-defined query from the box above.
+# This is the Question Query
+# The result of this query is sent to OpenAi and HuggingFace Language Models.
+
+
+
+
+
+# For more information on how to write a SPARQL query visit: https://query.wikidata.org/querybuilder/
+# Also feel free to use the existing examples in the wikidata: https://query.wikidata.org/
 """
-predicate1 = ["The Capital city of $ is ", "pred1 -2"]
+predicate1 = ["Predicate is an unfinished sentence that relates the outcomes of Question Quey to the results of Answer Query."]
 answerQuery1 = """
-    answer 1
+# Please write a query or select a pre-defined query from the box above.
+# This is the Answer Query,
+# The result of this query will be used as a source to compare the results from Language Models.
+
+
+
+
+
+# For more information on how to write a SPARQL query visit: https://query.wikidata.org/querybuilder/
+# Also feel free to use the existing examples in the wikidata: https://query.wikidata.org/
 """
 titleList.append(title1)
 queryList.append(query1)
