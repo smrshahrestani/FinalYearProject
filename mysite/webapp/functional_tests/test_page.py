@@ -174,7 +174,7 @@ class TestPage(StaticLiveServerTestCase):
         self.assertTrue(label.text.lower() in hFace.text.lower())
     
 
-    def test_playground_predicate_has_more_than_one_dollar_simbol_fails(self):
+    def test_playground_predicate_has_more_than_one_dollar_symbol_fails(self):
         self.browser.get('http://localhost:8000/playground')
 
         query = "A query"

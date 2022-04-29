@@ -4,7 +4,9 @@
 
 import requests
 from difflib import SequenceMatcher
+import collections
 import time
+
 
 # Converts the query to a single line
 # @params: String
@@ -53,13 +55,31 @@ def removePredicate(label, predicate, final):
   return finalList
 
 
+# # Calculates the similarity between two strings
+# # @params: String: the first string, String: the second string
+# # @return: Float: a number between 0 and 1
+# def similar(a, b):
+#   a = a.lower()
+#   b = b.lower()
+#   return SequenceMatcher(None, a, b).ratio()
+
 # Calculates the similarity between two strings
+# 
 # @params: String: the first string, String: the second string
 # @return: Float: a number between 0 and 1
-def similar(a, b):
-  a = a.lower()
-  b = b.lower()
-  return SequenceMatcher(None, a, b).ratio()
+def similar(s1: str, s2: str):
+  s1 = s1.lower()
+  s2 = s2.lower()
+  length = len(s1) + len(s2)
+
+  if not length:
+   return 1.0
+
+  intersect = collections.Counter(s1) & collections.Counter(s2)
+  matches = sum(intersect.values())
+
+  return 2.0 * matches / length
+
 
 
 # This function calculates the similarity of openai and huggingface with wikidata
@@ -118,7 +138,7 @@ def getScore(source, sentences):
     for i in sentences:
       a.append(i[j])
     pairScore.append(compare(source[j], a))
-    time.sleep(0.1) # sleep for 0.1s
+    time.sleep(0.3) # sleep for 0.1s
   
   final = []
   for j in range(len(pairScore[0])):

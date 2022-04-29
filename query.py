@@ -14,7 +14,7 @@ wikidata = 'https://query.wikidata.org/sparql'
 # It can find multiple label
 # @params: [Dictionary: the query result from the endpoints]
 # @return: [labels], [[values in label 1],[values in label 2], ...]
-def findLabelsUpdated(query):
+def findLabels(query):
 
     keys = []
     values = []
@@ -71,7 +71,7 @@ def makeQuery(server, query):
 # @params: String: name of the server, String: the query
 # @return: [labels], [[values in label 1],[values in label 2], ...]
 def getLabels(server, query):
-    return findLabelsUpdated(makeQuery(server, query))
+    return findLabels(makeQuery(server, query))
 
 
 # This is a getter function for finding the descriptions in a query
@@ -89,6 +89,6 @@ def getDescriptions(server, query):
 def getData(server, query):
     print("Querying From Database, Please be patient...")
     query = makeQuery(server, query)
-    label = findLabelsUpdated(query)
+    label = findLabels(query)
     description = findDescriptions(query)
     return label, description

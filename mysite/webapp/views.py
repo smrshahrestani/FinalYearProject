@@ -22,7 +22,6 @@ titles, queries, predicates, answerQueries = data[0], data[1], data[2], data[3]
 
 # A function for loading the playground page
 def playground(request):
-    print(type(request))
     return render(request, 'playground.html', { "currentPage": "playground"})
 
 
@@ -52,8 +51,8 @@ def apply(request):
     return render(request, 'stats.html', myContext)
 
 
-# A function to get statistics page data and send it to the language models and show the results back
-# and comapres the results with the wikidata answer query
+# A function to get the statistics page data and send it to the language models and show the results back
+# and compares the results with the wikidata answer query
 # gives an individual score and an average score for both language models
 def statsData(request):
     
