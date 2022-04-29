@@ -58,19 +58,15 @@ We will use the package manager [pip](https://pip.pypa.io/en/stable/) for our in
 $ python3 -m venv <name_of_your_environment>
 $ source <name_of_your_environment>/bin/activate
 ```
-5. And to make sure everything is up to date, do:
+5. Install all the required libraries
 ```shell
-$ pip install --upgrade pip
+$ pip install --upgrade -r requirements.txt
 ```
-6. Install all the required libraries
-```shell
-$ pip install -r requirements.txt
-```
-7. Apply the changes to the project
+6. Apply the changes to the project
 ```shell
 $ python mysite/manage.py migrate
 ```
-8. Run the server
+7. Run the server
 ```shell
 $ python mysite/manage.py runserver
 ```
@@ -79,9 +75,9 @@ $ python mysite/manage.py runserver
 ```shell
 $ python mysite/manage.py runserver <new_port>
 ```
-9. Open your prefered browser and navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000).
+8. Open your prefered browser and navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-10. Enjoy!
+9. Enjoy!
 
 ----------------------------------------------------------------
 
@@ -95,7 +91,7 @@ The app uses Chrome for testing, so users are required to download the Chrome on
 
 2. Make sure the virtual environment in activated. If you haven't created one, go to step 4 in the Installation.
 
-3. To run the tests, the server should be up and running. To run the server use a different Terminal and follow step 8 in the Installation.
+3. To run the tests, the server should be up and running. To run the server use a different Terminal and follow step 7 in the Installation.
 
 then run the following command: 
 
