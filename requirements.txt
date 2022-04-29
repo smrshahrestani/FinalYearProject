@@ -1,5 +1,6 @@
 # requirements.txt
 
 pip
-Django==4.0.4
-requests==2.27.1
+Django
+requests
+selenium
