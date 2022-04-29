@@ -1,3 +1,5 @@
+# convertor.py
+
 # @Author: Seyed Mohammad Reza Shahrestani
 # @date: 22/04/2022
 
@@ -18,7 +20,7 @@ def convertToOneLine(query):
 
 
 # Parses the sentence and splits it into two parts
-# Returns -1 if the sentence has more that one '$'
+# Returns -1 if the sentence has more than one '$'
 # @params: String
 # @return: String, String
 def parse(data):
@@ -112,7 +114,7 @@ def query(payload):
 
 
 # This function puts the parameters into a dictionary
-# and sends it to query functions
+# and sends them to query functions
 # @params: String: the source sentence, [Strings: list of sentences to be compared with the source sentence]
 # @return: Json object
 def compare(source, sentences):
@@ -126,7 +128,7 @@ def compare(source, sentences):
   return data
 
 
-# This function pairs the sentences of the language models, then sends it to the comapre function
+# This function pairs the sentences of the language models, then sends it to the compare function
 # along with the source sentence
 # @params: [Strings: list of the source sentences], [[LM1: String: sentences], [LM2: String: sentences], ...]
 # @return: [Float: final scores]
